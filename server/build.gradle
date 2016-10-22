@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+repositories {
+     jcenter()
+}
+
+buildscript {
+	repositories {
+		mavenCentral()
+		}
+     dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+apply plugin: 'spring-boot'
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile("org.springframework.boot:spring-boot-starter-web:1.4.1.RELEASE")
+    compile("org.springframework.boot:spring-boot-devtools")
+    testCompile 'junit:junit:4.12'
+}
