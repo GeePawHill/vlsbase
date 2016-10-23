@@ -1,7 +1,5 @@
 package server;
 
-import java.util.Random;
-
 public class IdGenerator {
 	
 	static int nextNoun=0;

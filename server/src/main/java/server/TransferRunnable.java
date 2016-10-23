@@ -1,10 +1,7 @@
 package server;
 
-import java.util.Random;
-
 public class TransferRunnable implements Runnable {
 
-	private static Random random = new Random(1031);
 	private String fromId;
 	private String toId;
 	private String orderId;
