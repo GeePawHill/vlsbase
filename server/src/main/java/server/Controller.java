@@ -30,11 +30,11 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/transfer")
-	public BatchResponse transfer(@RequestParam(value = "fromId") String fromId,@RequestParam(value="toId") String toId,@RequestParam(value="order") String order)
+	public Batch transfer(@RequestParam(value = "fromId") String fromId,@RequestParam(value="toId") String toId,@RequestParam(value="order") String order)
 	{
 		int delay = random.nextInt(20) + 5;
-		BatchResponse response = new BatchResponse(delay);
-		BatchResponse.responses.put(response.id,response);
+		Batch response = new Batch(delay);
+		Batch.responses.put(response.id,response);
 		TransferRunnable transfer = new TransferRunnable(delay,response.id, fromId, toId, order);
 		new Thread(transfer).start();
 		return response;
@@ -43,10 +43,10 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/batches")
-	public List<BatchResponse> batches()
+	public List<Batch> batches()
 	{
-		List<BatchResponse> result = new ArrayList<>();
-		for(Entry<String,BatchResponse> entry : BatchResponse.responses.entrySet())
+		List<Batch> result = new ArrayList<>();
+		for(Entry<String,Batch> entry : Batch.responses.entrySet())
 		{
 			result.add(entry.getValue());
 		}
@@ -56,12 +56,12 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/batch")
-	public BatchResponse batch(@RequestParam(value = "id") String id)
+	public Batch batch(@RequestParam(value = "id") String id)
 	{
-		BatchResponse response = BatchResponse.responses.get(id);
+		Batch response = Batch.responses.get(id);
 		if(response==null)
 		{
-			response = new BatchResponse(id,"Error","Unknown Response");
+			response = new Batch(id,"Error","Unknown Response");
 		}
 		return response;
 	}

@@ -30,7 +30,7 @@ public class AllData {
 	}
 
 	public Tab getTab() {
-		Tab tab = new Tab("All Dealers");
+		Tab tab = new Tab("All Data");
 		HBox pane = new HBox();
 		ToolBar bar = new ToolBar();
 		Button refresh = new Button("Refresh");
