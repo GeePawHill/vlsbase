@@ -25,34 +25,34 @@ public class TransferRunnable implements Runnable {
 		}
 		Dealer from = Dealer.findById(fromId);
 		if (from == null) {
-			BatchResponse result = new BatchResponse(responseId, "Invalid From Dealer");
+			BatchResponse result = new BatchResponse(responseId, "Error","Invalid From Dealer");
 			BatchResponse.responses.put(result.id, result);
 			return;
 		}
 
 		Dealer to = Dealer.findById(toId);
 		if (to == null) {
-			BatchResponse result = new BatchResponse(responseId, "Invalid To Dealer");
+			BatchResponse result = new BatchResponse(responseId, "Error","Invalid To Dealer");
 			BatchResponse.responses.put(result.id, result);
 			return;
 		}
 		
 		Order order = Order.findById(orderId);
 		if (order == null) {
-			BatchResponse result = new BatchResponse(responseId, "Invalid Order");
+			BatchResponse result = new BatchResponse(responseId, "Error","Invalid Order");
 			BatchResponse.responses.put(result.id, result);
 			return;
 		}
 		
 		if(!order.owner.equals(from.id))
 		{
-			BatchResponse result = new BatchResponse(responseId, "Order Doesn't Belong To From");
+			BatchResponse result = new BatchResponse(responseId, "Error","Order Doesn't Belong To From");
 			BatchResponse.responses.put(result.id, result);
 			return;
 		}
 		
 		order.owner = to.id;
-		BatchResponse result = new BatchResponse(responseId, "Succeeded");
+		BatchResponse result = new BatchResponse(responseId, "Success","Completed");
 		BatchResponse.responses.put(result.id, result);
 	}
 

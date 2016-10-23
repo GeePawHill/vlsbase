@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Order {
 
-	private static ArrayList<Order> orderList = null;
+	public static ArrayList<Order> orderList = null;
 	private static Random random = new Random(1027);
 
 	static {

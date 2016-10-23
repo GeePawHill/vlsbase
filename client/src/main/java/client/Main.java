@@ -33,7 +33,7 @@ public class Main extends Application
 		
 		TabPane tabs = new TabPane();
 		root.setCenter(tabs);
-		tabs.getTabs().add(new AllDealers().getTab());
+		tabs.getTabs().add(new AllData().getTab());
 		
 		TextAreaAppender.setTextArea(area);
 		root.setBottom(area);

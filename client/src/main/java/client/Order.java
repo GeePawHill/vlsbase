@@ -2,22 +2,21 @@ package client;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Dealer {
-
+public class Order {
 	private final SimpleStringProperty id;
-	private SimpleStringProperty name;
+	private SimpleStringProperty owner;
 
-	public Dealer() {
+	public Order() {
 		this.id = new SimpleStringProperty();
-		this.name = new SimpleStringProperty();
+		this.owner = new SimpleStringProperty();
 	}
 
-	public String getName() {
-		return name.get();
+	public String getOwner() {
+		return owner.get();
 	}
 
-	public void setName(String aMessage) {
-		name.set(aMessage);
+	public void setOwner(String aMessage) {
+		owner.set(aMessage);
 	}
 
 	public String getId() {
@@ -27,5 +26,4 @@ public class Dealer {
 	public void setId(String anId) {
 		id.set(anId);
 	}
-
 }

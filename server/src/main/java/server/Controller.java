@@ -1,6 +1,8 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +23,9 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/orders")
-	public List<Order> orders(@RequestParam(value = "dealerId") String dealerId)
+	public List<Order> orders()
 	{
-		return Order.find(dealerId);
+		return Order.orderList;
 	}
 	
 	@CrossOrigin(origins = "*")
@@ -37,6 +39,20 @@ public class Controller {
 		new Thread(transfer).start();
 		return response;
 	}
+
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping("/batches")
+	public List<BatchResponse> batches()
+	{
+		List<BatchResponse> result = new ArrayList<>();
+		for(Entry<String,BatchResponse> entry : BatchResponse.responses.entrySet())
+		{
+			result.add(entry.getValue());
+		}
+		return result;
+	}
+
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/batch")
@@ -45,7 +61,7 @@ public class Controller {
 		BatchResponse response = BatchResponse.responses.get(id);
 		if(response==null)
 		{
-			response = new BatchResponse(id,"Unknown Response");
+			response = new BatchResponse(id,"Error","Unknown Response");
 		}
 		return response;
 	}
