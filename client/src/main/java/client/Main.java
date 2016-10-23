@@ -1,5 +1,7 @@
 package client;
 
+import java.util.Map;
+
 import org.slf4j.LoggerFactory;
 
 import javafx.application.Application;
@@ -19,6 +21,9 @@ public class Main extends Application
 	public void init() throws Exception
 	{
 		super.init();
+        final Parameters params = getParameters();
+        Map<String,String> named = params.getNamed();
+        JsonClient.setServerPort(named.get("server.port"));
 	}
 
 	@Override

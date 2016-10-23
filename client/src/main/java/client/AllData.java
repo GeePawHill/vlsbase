@@ -22,11 +22,11 @@ public class AllData {
 	public void refresh() {
 		JsonClient client = new JsonClient();
 		oDealers.clear();
-		oDealers.addAll(client.getCollection("http://localhost:8090/dealers", Dealer.class));
+		oDealers.addAll(client.getCollection("/dealers", Dealer.class));
 		oBatches.clear();
-		oBatches.addAll(client.getCollection("http://localhost:8090/batches", Batch.class));
+		oBatches.addAll(client.getCollection("/batches", Batch.class));
 		oOrders.clear();
-		oOrders.addAll(client.getCollection("http://localhost:8090/orders", Order.class));
+		oOrders.addAll(client.getCollection("/orders", Order.class));
 	}
 
 	public Tab getTab() {

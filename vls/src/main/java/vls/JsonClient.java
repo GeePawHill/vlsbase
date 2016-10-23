@@ -1,4 +1,4 @@
-package client;
+package vls;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,17 +14,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 
 public class JsonClient {
+	/* Cached for performance */
 	private static final ObjectMapper objectMapper = new ObjectMapper();
-	private static String port;
 
 	public <T> T get(String url, final Class<T> classType) {
-		String response = get("http://localhost:"+port+url);
+		String response = get(url);
 		final JavaType type = objectMapper.getTypeFactory().constructType(classType);
 		return convertResponseToObject(type, response);
 	}
 
 	public <T> List<T> getCollection(String url, final Class<T> classType) {
-		final String response = get("http://localhost:"+port+url);
+		final String response = get(url);
 		return convertResponseToObjectList(response, classType);
 	}
 
@@ -74,14 +74,6 @@ public class JsonClient {
 	@SuppressWarnings("rawtypes")
 	private static <E> CollectionType createCollectionType(Class<? extends Collection> collection, Class<E> type) {
 		return objectMapper.getTypeFactory().constructCollectionType(collection, type);
-	}
-
-	public static void setServerPort(String portString) {
-		if(portString==null || portString.isEmpty())
-		{
-			throw new RuntimeException("No port string set.");
-		}
-		port = portString;
 	}
 
 }
