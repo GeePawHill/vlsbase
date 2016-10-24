@@ -12,19 +12,17 @@ import javafx.collections.transformation.SortedList;
 
 public class Order {
 
-	static public class OrderSorter implements Comparator<Order>
-	{
+	static public class OrderSorter implements Comparator<Order> {
 
 		@Override
 		public int compare(Order o1, Order o2) {
 			return o1.getId().compareTo(o2.getId());
 		}
 	}
-	
-	
+
 	private final static ObservableList<Order> unsorted = FXCollections.observableList(new ArrayList<Order>());
-	
-	public final static SortedList<Order> oOrders = new SortedList<>(unsorted,new OrderSorter());
+
+	public final static SortedList<Order> oOrders = new SortedList<>(unsorted, new OrderSorter());
 	private final static Random random = new Random(1027);
 
 	private final SimpleStringProperty id;
@@ -40,9 +38,8 @@ public class Order {
 		this.id = new SimpleStringProperty();
 		this.owner = new SimpleStringProperty();
 	}
-	
-	public SimpleStringProperty ownerProperty()
-	{
+
+	public SimpleStringProperty ownerProperty() {
 		return owner;
 	}
 
@@ -54,11 +51,10 @@ public class Order {
 		owner.set(aMessage);
 	}
 
-	public SimpleStringProperty idProperty()
-	{
+	public SimpleStringProperty idProperty() {
 		return id;
 	}
-	
+
 	public String getId() {
 		return id.get();
 	}
@@ -106,8 +102,16 @@ public class Order {
 	}
 
 	public static void setOwner(Order order, String owner) {
-//		unsorted.remove(order);
 		order.setOwner(owner);
-//		unsorted.add(order);
+	}
+
+	public static Object orders(String id) {
+		ArrayList<Order> result = new ArrayList<>();
+		for (Order order : unsorted) {
+			if (order.getOwner().equals(id)) {
+				result.add(order);
+			}
+		}
+		return result;
 	}
 }

@@ -10,9 +10,9 @@ public class ServerHandler implements Handler {
 		return response;
 	}
 	
-	public String orders()
+	public String orders(String id)
 	{
-		String response = new StringClient().get("http://localhost:8090/orders");
+		String response = new StringClient().get("http://localhost:8090/orders?id="+id);
 		return response;
 	}
 

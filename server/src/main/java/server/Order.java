@@ -58,4 +58,16 @@ public class Order {
 		}
 		return null;
 	}
+
+	public static List<Order> orders(String id) {
+		ArrayList<Order> result = new ArrayList<>();
+		for(Order order : orderList)
+		{
+			if(order.owner.equals(id))
+			{
+				result.add(order);
+			}
+		}
+		return result;
+	}
 }

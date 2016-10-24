@@ -17,9 +17,9 @@ public class VlsHandler implements Handler {
 	}
 	
 	@Override
-	public String orders()
+	public String orders(String id)
 	{
-		String response = ObjectToJson.object(Order.all());
+		String response = ObjectToJson.object(Order.orders(id));
 		return response;
 	}
 

@@ -23,9 +23,9 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/orders")
-	public List<Order> orders()
+	public List<Order> orders(@RequestParam(value="id") String id)
 	{
-		return Order.orderList;
+		return Order.orders(id);
 	}
 	
 	@CrossOrigin(origins = "*")

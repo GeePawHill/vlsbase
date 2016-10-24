@@ -4,7 +4,7 @@ public interface Handler {
 
 	String dealers();
 
-	String orders();
+	String orders(String id);
 
 	String transfer(String fromId, String toId, String order);
 

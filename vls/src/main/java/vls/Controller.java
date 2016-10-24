@@ -47,10 +47,10 @@ public class Controller {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/orders")
-	public String orders()
+	public String orders(@RequestParam("id") String id)
 	{
 		logger.warn("REQUEST /orders");
-		String response = Vls.handler().orders();
+		String response = Vls.handler().orders(id);
 		logger.warn("RESPONSE "+response);
 		return response;
 	}

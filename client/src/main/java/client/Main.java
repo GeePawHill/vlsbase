@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
@@ -36,19 +35,20 @@ public class Main extends Application
 		area.setFont(font);
 		area.setMinHeight(300d);
 		
-		TabPane tabs = new TabPane();
-		root.setCenter(tabs);
-		tabs.getTabs().add(new AllData().getTab());
-		
 		TextAreaAppender.setTextArea(area);
 		root.setBottom(area);
+		
+		root.setCenter(new OrderData().getTab());
 		stage.setScene(new Scene(root));
 		stage.setMaximized(true);
 		stage.show();
+		new Login().run();
 		LoggerFactory.getLogger(Main.class).debug("Log started.");
 	}
 	
-    public static void main(String[] args) throws Exception {
+
+
+	public static void main(String[] args) throws Exception {
         Application.launch(Main.class,args);
     }
 
