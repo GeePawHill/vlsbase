@@ -12,8 +12,9 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
-public class OrderData {
+public class OrderView {
 
 	final static private ObservableList<Order> oOrders = FXCollections.observableList(new ArrayList<Order>());
 
@@ -24,14 +25,15 @@ public class OrderData {
 	}
 
 	public Pane getTab() {
-		HBox pane = new HBox();
+		VBox vbox = new VBox();
 		ToolBar bar = new ToolBar();
-		Button refresh = new Button("Refresh");
-		bar.getItems().add(refresh);
-		refresh.setOnAction((event) -> refresh());
+		Button transfer = new Button("Transfer");
+		bar.getItems().add(transfer);
+		transfer.setOnAction((event) -> transfer());
 		bar.setOrientation(Orientation.HORIZONTAL);
-		pane.getChildren().add(bar);
-
+		vbox.getChildren().add(bar);
+		HBox hbox = new HBox();
+		vbox.getChildren().add(hbox);
 		TableView<Order> orderList = new TableView<>();
 		orderList.setItems(oOrders);
 		TableColumn<Order, String> orderIdCol = new TableColumn<Order, String>("Id");
@@ -42,7 +44,12 @@ public class OrderData {
 		orderOwnerCol.setCellValueFactory(new PropertyValueFactory<Order, String>("owner"));
 		orderList.getColumns().add(orderIdCol);
 		orderList.getColumns().add(orderOwnerCol);
-		pane.getChildren().add(orderList);
-		return pane;
+		hbox.getChildren().add(orderList);
+		return vbox;
+	}
+
+	private void transfer() {
+		new Transfer().run();
+		refresh();
 	}
 }

@@ -27,7 +27,7 @@ public class Dealer {
 	
 	private static Dealer makeNewDealer(int index) {
 		String id = IdGenerator.noun("D_");
-		String name = id+"(Dealer)";
+		String name = id;
 		Dealer dealer = new Dealer(id,name);
 		return dealer;
 	}

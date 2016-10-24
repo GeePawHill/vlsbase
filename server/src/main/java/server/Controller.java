@@ -32,7 +32,7 @@ public class Controller {
 	@RequestMapping("/transfer")
 	public Batch transfer(@RequestParam(value = "fromId") String fromId,@RequestParam(value="toId") String toId,@RequestParam(value="order") String order)
 	{
-		int delay = random.nextInt(20) + 5;
+		int delay = random.nextInt(15) + 5;
 		Batch response = new Batch(delay);
 		Batch.responses.put(response.id,response);
 		TransferRunnable transfer = new TransferRunnable(delay,response.id, fromId, toId, order);

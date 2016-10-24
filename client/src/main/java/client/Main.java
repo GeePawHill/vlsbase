@@ -38,12 +38,14 @@ public class Main extends Application
 		TextAreaAppender.setTextArea(area);
 		root.setBottom(area);
 		
-		root.setCenter(new OrderData().getTab());
+		OrderView orderView = new OrderView();
+		root.setCenter(orderView.getTab());
 		stage.setScene(new Scene(root));
 		stage.setMaximized(true);
 		stage.show();
-		new Login().run();
 		LoggerFactory.getLogger(Main.class).debug("Log started.");
+		new Login().run();
+		orderView.refresh();
 	}
 	
 

@@ -27,5 +27,11 @@ public class Dealer {
 	public void setId(String anId) {
 		id.set(anId);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return name.getValue();
+	}
 
 }

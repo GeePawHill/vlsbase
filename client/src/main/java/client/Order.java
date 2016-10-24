@@ -26,4 +26,9 @@ public class Order {
 	public void setId(String anId) {
 		id.set(anId);
 	}
+	
+	@Override
+	public String toString() {
+		return id.get();
+	}
 }
