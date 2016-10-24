@@ -35,9 +35,6 @@ public class Main extends Application
 		area.setFont(font);
 		area.setMinHeight(300d);
 		
-		TextAreaAppender.setTextArea(area);
-		root.setBottom(area);
-		
 		OrderView orderView = new OrderView();
 		root.setCenter(orderView.getTab());
 		stage.setScene(new Scene(root));

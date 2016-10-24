@@ -1,5 +1,7 @@
 package server;
 
+import java.time.LocalDateTime;
+
 public class TransferRunnable implements Runnable {
 
 	private String fromId;
@@ -52,6 +54,8 @@ public class TransferRunnable implements Runnable {
 		}
 		
 		order.owner = to.id;
+		order.changed = LocalDateTime.now().toString();
+
 		Batch result = new Batch(responseId, "Success","Completed");
 		Batch.responses.put(result.id, result);
 	}

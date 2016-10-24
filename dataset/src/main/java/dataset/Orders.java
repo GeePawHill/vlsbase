@@ -1,5 +1,6 @@
 package dataset;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -60,6 +61,8 @@ public class Orders {
 
 	public void setOwner(Order order, String owner) {
 		order.setOwner(owner);
+		order.setChanged(LocalDateTime.now().toString());
+
 	}
 
 	public Object orders(String id) {

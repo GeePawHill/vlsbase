@@ -1,8 +1,12 @@
 package server;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import javax.print.attribute.standard.DateTimeAtCompleted;
 
 public class Order {
 
@@ -15,10 +19,12 @@ public class Order {
 
 	public String id;
 	public String owner;
+	public String changed;
 
 	public Order(String id,String owner) {
 		this.id = id;
 		this.owner = owner;
+		this.changed = LocalDateTime.now().toString();
 	}
 
 	public static List<Order> find(String dealerId) {
