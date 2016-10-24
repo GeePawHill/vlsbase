@@ -14,16 +14,9 @@ import javafx.application.Platform;
 @EnableAutoConfiguration
 public class Controller {
 	
-	static Handler handler;
-
 	static Logger logger = LoggerFactory.getLogger("Controller");
 
 	public Controller() {
-	}
-	
-	static public void setHandler(Handler aHandler)
-	{
-		handler = aHandler;
 	}
 	
 	@CrossOrigin(origins="*")
@@ -47,7 +40,7 @@ public class Controller {
 	@RequestMapping("/dealers")
 	public String dealers() {
 		logger.warn("REQUEST /dealers");
-		String response = handler.dealers();
+		String response = Vls.handler().dealers();
 		logger.warn("RESPONSE "+response);
 		return response;
 	}
@@ -57,7 +50,7 @@ public class Controller {
 	public String orders()
 	{
 		logger.warn("REQUEST /orders");
-		String response = handler.orders();
+		String response = Vls.handler().orders();
 		logger.warn("RESPONSE "+response);
 		return response;
 	}
@@ -67,7 +60,7 @@ public class Controller {
 	public String transfer(@RequestParam(value = "fromId") String fromId,@RequestParam(value="toId") String toId,@RequestParam(value="order") String order)
 	{
 		logger.warn("REQUEST /transfer Order: "+order+ " From "+fromId+" To "+toId);
-		String response = handler.transfer(fromId, toId, order);
+		String response = Vls.handler().transfer(fromId, toId, order);
 		logger.warn("RESPONSE "+response);
 		return response;
 	}
@@ -77,7 +70,7 @@ public class Controller {
 	public String batches()
 	{
 		logger.warn("REQUEST /batches");
-		String response = handler.batches();
+		String response = Vls.handler().batches();
 		logger.warn("RESPONSE "+response);
 		return response;
 	}
@@ -88,7 +81,7 @@ public class Controller {
 	public String batch(@RequestParam(value = "id") String id)
 	{
 		logger.warn("REQUEST /batch Id "+id);
-		String response = handler.batch(id);
+		String response = Vls.handler().batch(id);
 		logger.warn("RESPONSE "+response);
 		return response;
 	}

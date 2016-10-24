@@ -1,8 +1,9 @@
 package vls;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
+import dataset.Batch;
+import dataset.Dealer;
+import dataset.Order;
+import dataset.TransferRunnable;
 
 public class VlsHandler implements Handler {
 	
@@ -18,28 +19,22 @@ public class VlsHandler implements Handler {
 	@Override
 	public String orders()
 	{
-		String response = ObjectToJson.object(Order.orderList);
+		String response = ObjectToJson.object(Order.all());
 		return response;
 	}
 
 	@Override
 	public String transfer(String fromId,String toId, String order)
 	{
-		BatchResponse response = new BatchResponse(0);
-		BatchResponse.responses.put(response.id,response);
-		new TransferRunnable(0,response.id, fromId, toId, order).run();
+		Batch response = Batch.makeNewBatch();
+		new TransferRunnable(0,response.getId(), fromId, toId, order).run();
 		return ObjectToJson.object(response);
 	}
 
 	@Override
 	public String batches()
 	{
-		List<BatchResponse> result = new ArrayList<>();
-		for(Entry<String,BatchResponse> entry : BatchResponse.responses.entrySet())
-		{
-			result.add(entry.getValue());
-		}
-		String response = ObjectToJson.object(result);
+		String response = ObjectToJson.object(Batch.all());
 		return response;
 	}
 
@@ -47,12 +42,7 @@ public class VlsHandler implements Handler {
 	@Override
 	public String batch(String id)
 	{
-		BatchResponse response = BatchResponse.responses.get(id);
-		if(response==null)
-		{
-			response = new BatchResponse(id,"Error","Unknown Response");
-		}
-		return ObjectToJson.object(response);
+		return ObjectToJson.object(Batch.find(id));
 	}
 
 }

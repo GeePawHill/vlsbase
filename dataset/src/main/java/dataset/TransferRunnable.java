@@ -1,4 +1,4 @@
-package vls;
+package dataset;
 
 public class TransferRunnable implements Runnable {
 
@@ -25,35 +25,29 @@ public class TransferRunnable implements Runnable {
 		}
 		Dealer from = Dealer.findById(fromId);
 		if (from == null) {
-			BatchResponse result = new BatchResponse(responseId, "Error","Invalid From Dealer");
-			BatchResponse.responses.put(result.id, result);
+			Batch.replace(responseId, "Error","Invalid From Dealer");
 			return;
 		}
 
 		Dealer to = Dealer.findById(toId);
 		if (to == null) {
-			BatchResponse result = new BatchResponse(responseId, "Error","Invalid To Dealer");
-			BatchResponse.responses.put(result.id, result);
+			Batch.replace(responseId, "Error","Invalid To Dealer");
 			return;
 		}
 		
 		Order order = Order.findById(orderId);
 		if (order == null) {
-			BatchResponse result = new BatchResponse(responseId, "Error","Invalid Order");
-			BatchResponse.responses.put(result.id, result);
+			Batch.replace(responseId, "Error","Invalid Order");
 			return;
 		}
 		
-		if(!order.owner.equals(from.id))
+		if(!order.getOwner().equals(from.getId()))
 		{
-			BatchResponse result = new BatchResponse(responseId, "Error","Order Doesn't Belong To From");
-			BatchResponse.responses.put(result.id, result);
+			Batch.replace(responseId, "Error","Order Doesn't Belong To From");
 			return;
 		}
-		
-		order.owner = to.id;
-		BatchResponse result = new BatchResponse(responseId, "Success","Completed");
-		BatchResponse.responses.put(result.id, result);
+		Order.setOwner(order,to.getId());
+		Batch.replace(responseId, "Success","Completed");
 	}
 
 }

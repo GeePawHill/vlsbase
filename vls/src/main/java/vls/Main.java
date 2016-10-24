@@ -13,6 +13,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
@@ -36,6 +37,9 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		BorderPane root = new BorderPane();
 		root.setTop(makeTools());
+		TabPane tabs = new TabPane();
+		tabs.getTabs().add(new AllData().getTab());
+		root.setCenter(tabs);
 		root.setBottom(makeLog());
 		stage.setScene(new Scene(root));
 		stage.setMaximized(true);
@@ -43,8 +47,8 @@ public class Main extends Application {
 		List<String> args = getParameters().getRaw();
 		context = SpringApplication.run(Main.class, args.toArray(new String[0]));
 		logger.warn("VLS Running.");
-		Vls.simulationOn();
 		Vls.simulationOff();
+		Vls.simulationOn();
 	}
 
 	private Node makeTools() {
