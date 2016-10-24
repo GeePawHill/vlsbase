@@ -10,14 +10,13 @@ public class TextAreaAppender<E> extends AppenderBase<E> {
     
     public TextAreaAppender()
     {
-    	System.out.println("Created.");
     }
  
     public static void setTextArea(TextArea area)
     {
     	textArea = area;
     }
- 
+    
 	@Override
 	protected void append(E eventObject)
 	{

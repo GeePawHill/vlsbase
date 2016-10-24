@@ -54,14 +54,25 @@ public class AllData {
 
 		TableView<Order> orderList = new TableView<>();
 		orderList.setItems(Dataset.data.orders().sorted());
+		
 		TableColumn<Order, String> orderIdCol = new TableColumn<Order, String>("Id");
 		orderIdCol.setCellValueFactory(new PropertyValueFactory<Order, String>("id"));
 		orderIdCol.setMinWidth(100d);
 		orderIdCol.setMaxWidth(100d);
+		
 		TableColumn<Order, String> orderOwnerCol = new TableColumn<Order, String>("Owner");
 		orderOwnerCol.setCellValueFactory(new PropertyValueFactory<Order, String>("owner"));
+		orderOwnerCol.setMinWidth(100d);
+		orderOwnerCol.setMaxWidth(100d);
+
+		TableColumn<Order, String> changedCol = new TableColumn<Order, String>("Changed");
+		changedCol.setCellValueFactory(new PropertyValueFactory<Order, String>("changed"));
+		changedCol.setMinWidth(200d);
+		
 		orderList.getColumns().add(orderIdCol);
 		orderList.getColumns().add(orderOwnerCol);
+		orderList.getColumns().add(changedCol);
+		
 		pane.getChildren().add(orderList);
 		tab.setContent(pane);
 		return tab;
