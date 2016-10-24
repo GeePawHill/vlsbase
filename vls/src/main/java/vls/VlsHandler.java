@@ -1,8 +1,13 @@
 package vls;
 
+import java.util.List;
+
 import dataset.Batch;
 import dataset.Dataset;
+import dataset.Dealer;
+import dataset.Order;
 import dataset.TransferRunnable;
+import javafx.collections.ObservableList;
 
 public class VlsHandler implements Handler {
 
@@ -11,13 +16,27 @@ public class VlsHandler implements Handler {
 
 	@Override
 	public String dealers() {
-		String response = ObjectToJson.object(Dataset.data.dealers().sorted());
+		ObservableList<Dealer> sorted = Dataset.data.dealers().sorted();
+		SmartLogItem.open("/dealers", "");
+		for(Dealer dealer : sorted)
+		{
+			SmartLogItem.add(dealer.getId(), "");
+		}
+		SmartLogItem.close();
+		String response = ObjectToJson.object(sorted);
 		return response;
 	}
 
 	@Override
 	public String orders(String id) {
-		String response = ObjectToJson.object(Dataset.data.orders().orders(id));
+		List<Order> orders = Dataset.data.orders().orders(id);
+		SmartLogItem.open("/orders", id);
+		for(Order order : orders)
+		{
+			SmartLogItem.add(order.getId(), order.getChanged());
+		}
+		SmartLogItem.close();
+		String response = ObjectToJson.object(orders);
 		return response;
 	}
 

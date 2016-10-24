@@ -40,6 +40,7 @@ public class Main extends Application {
 		root.setTop(makeTools());
 		TabPane tabs = new TabPane();
 		tabs.getTabs().add(new AllData().getTab());
+		tabs.getTabs().add(new SmartLogView().getTab());
 		root.setCenter(tabs);
 		root.setBottom(makeLog());
 		stage.setScene(new Scene(root));

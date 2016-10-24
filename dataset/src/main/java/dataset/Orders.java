@@ -65,7 +65,7 @@ public class Orders {
 
 	}
 
-	public Object orders(String id) {
+	public List<Order> orders(String id) {
 		ArrayList<Order> result = new ArrayList<>();
 		for (Order order : base) {
 			if (order.getOwner().equals(id)) {
