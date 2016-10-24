@@ -1,23 +1,15 @@
 package dataset;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Batch {
-
-	private static int nextId = 300;
-	public final static ObservableList<Batch> oBatches = FXCollections.observableList(new ArrayList<Batch>());
 	
 	private final SimpleStringProperty id;
 	private SimpleStringProperty status;
 	private SimpleStringProperty message;
 	private SimpleStringProperty delay;
 	
-	public Batch(String delay)
+	public Batch(int nextId,String delay)
 	{
 		this(String.format("B_%1$05d", nextId++),"Pending","",delay);
 	}
@@ -74,34 +66,5 @@ public class Batch {
 		delay.set(aDelay);
 	}
 
-	public static List<Batch> all() {
-		return oBatches;
-	}
 
-	public static Batch makeNewBatch() {
-		Batch result = new Batch("0");
-		oBatches.add(result);
-		return result;
-	}
-
-	public static Batch find(String id) {
-		for(Batch candidate : oBatches)
-		{
-			if(candidate.getId().equals(id)) return candidate;
-		}
-		return new Batch(id,"Error","Unknown Batch");
-	}
-
-	public static void replace(String responseId, String status, String message) {
-		for(Batch candidate : oBatches)
-		{
-			if(candidate.getId().equals(responseId))
-			{
-				oBatches.remove(candidate);
-				oBatches.add(new Batch(responseId,status,message,"0"));
-				return;
-			}
-		}
-		throw new RuntimeException("Attempt to replace non-existent batch.");
-	}
 }

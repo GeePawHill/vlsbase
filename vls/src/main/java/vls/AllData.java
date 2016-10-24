@@ -1,33 +1,27 @@
 package vls;
 
 import dataset.Batch;
+import dataset.Dataset;
 import dataset.Dealer;
 import dataset.Order;
-import javafx.geometry.Orientation;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToolBar;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 
 public class AllData {
 
-	public void refresh() {
+	public void reset() {
+		Dataset.data.reset();
 	}
 
 	public Tab getTab() {
 		Tab tab = new Tab("All Data");
 		HBox pane = new HBox();
-		ToolBar bar = new ToolBar();
-		Button refresh = new Button("Refresh");
-		bar.getItems().add(refresh);
-		refresh.setOnAction((event) -> refresh());
-		bar.setOrientation(Orientation.HORIZONTAL);
-		pane.getChildren().add(bar);
+
 		TableView<Dealer> dealerList = new TableView<>();
-		dealerList.setItems(Dealer.oDealers);
+		dealerList.setItems(Dataset.data.dealers().sorted());
 		dealerList.setMinWidth(100d);
 		dealerList.setMaxWidth(100d);
 
@@ -55,11 +49,11 @@ public class AllData {
 		batchList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		batchList.setMinWidth(500d);
 		batchList.setMaxWidth(500d);
-		batchList.setItems(Batch.oBatches);
+		batchList.setItems(Dataset.data.batches().sorted());
 		pane.getChildren().add(batchList);
 
 		TableView<Order> orderList = new TableView<>();
-		orderList.setItems(Order.oOrders);
+		orderList.setItems(Dataset.data.orders().sorted());
 		TableColumn<Order, String> orderIdCol = new TableColumn<Order, String>("Id");
 		orderIdCol.setCellValueFactory(new PropertyValueFactory<Order, String>("id"));
 		orderIdCol.setMinWidth(100d);

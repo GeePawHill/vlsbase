@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import dataset.Dataset;
 import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -62,6 +63,10 @@ public class Main extends Application {
 				mode.setText("Mode: Live");
 		});
 		mode.setOnAction((event) -> changeMode());
+		
+		Button reset = new Button("Reset");
+		bar.getItems().add(reset);
+		reset.setOnAction((event) -> Dataset.data.reset());
 
 		bar.setOrientation(Orientation.HORIZONTAL);
 		return bar;

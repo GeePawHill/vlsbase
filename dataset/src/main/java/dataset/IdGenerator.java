@@ -238,6 +238,10 @@ public class IdGenerator {
 		return make(prefix, divved , names[modded]);
 	}
 
-
+	public static void reset()
+	{
+		nextName=0;
+		nextNoun=0;
+	}
 	
 }

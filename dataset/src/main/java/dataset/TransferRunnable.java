@@ -8,46 +8,44 @@ public class TransferRunnable implements Runnable {
 	private String responseId;
 	private int delay;
 
-	public TransferRunnable(int delay,String responseId, String fromId, String toId, String orderId) {
+	public TransferRunnable(int delay, String responseId, String fromId, String toId, String orderId) {
 		this.delay = delay;
 		this.responseId = responseId;
 		this.fromId = fromId;
 		this.toId = toId;
 		this.orderId = orderId;
-
 	}
 
 	@Override
 	public void run() {
 		try {
-			Thread.sleep(delay*1000);
+			Thread.sleep(delay * 1000);
 		} catch (InterruptedException expected) {
 		}
-		Dealer from = Dealer.findById(fromId);
+		Dealer from = Dataset.data.dealers().findById(fromId);
 		if (from == null) {
-			Batch.replace(responseId, "Error","Invalid From Dealer");
+			Dataset.data.batches().replace(responseId, "Error", "Invalid From Dealer");
 			return;
 		}
 
-		Dealer to = Dealer.findById(toId);
+		Dealer to = Dataset.data.dealers().findById(toId);
 		if (to == null) {
-			Batch.replace(responseId, "Error","Invalid To Dealer");
+			Dataset.data.batches().replace(responseId, "Error", "Invalid To Dealer");
 			return;
 		}
-		
-		Order order = Order.findById(orderId);
+
+		Order order = Dataset.data.orders().findById(orderId);
 		if (order == null) {
-			Batch.replace(responseId, "Error","Invalid Order");
+			Dataset.data.batches().replace(responseId, "Error", "Invalid Order");
 			return;
 		}
-		
-		if(!order.getOwner().equals(from.getId()))
-		{
-			Batch.replace(responseId, "Error","Order Doesn't Belong To From");
+
+		if (!order.getOwner().equals(from.getId())) {
+			Dataset.data.batches().replace(responseId, "Error", "Order Doesn't Belong To From");
 			return;
 		}
-		Order.setOwner(order,to.getId());
-		Batch.replace(responseId, "Success","Completed");
+		Dataset.data.orders().setOwner(order, to.getId());
+		Dataset.data.batches().replace(responseId, "Success", "Completed");
 	}
 
 }

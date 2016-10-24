@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import dataset.Dataset;
 import javafx.application.Platform;
 
 @RestController
@@ -34,6 +35,16 @@ public class Controller {
 		Platform.runLater(() ->Vls.simulationOff());
 		return "Ok.";
 	}
+	
+	@CrossOrigin(origins="*")
+	@RequestMapping("/control/reset")
+	public String reset()
+	{
+		Dataset.data.reset();
+		return "Ok.";
+	}
+
+	
 
 
 	@CrossOrigin(origins = "*")
