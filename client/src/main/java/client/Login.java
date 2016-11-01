@@ -52,7 +52,7 @@ public class Login {
 	}
 
 	private ObservableList<Dealer> populateDealers() {
-		List<Dealer> dealers = new JsonClient().getCollection("/dealers", Dealer.class);
+		List<Dealer> dealers = new JsonClient().getCollection("/cvos/dealers", Dealer.class);
 		ObservableList<Dealer> result = FXCollections.observableList(dealers);
 		return result;
 	}

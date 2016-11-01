@@ -3,10 +3,15 @@ package server;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.Random;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +43,13 @@ public class Controller {
 		TransferRunnable transfer = new TransferRunnable(delay,response.id, fromId, toId, order);
 		new Thread(transfer).start();
 		return response;
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/withPost", method = { RequestMethod.POST, RequestMethod.GET } )
+	public String withPost(@RequestBody(required=false) String body, final HttpServletRequest request)
+	{
+		return "Posted: "+body + " with header cookie: " + request.getHeader("MyCookie");
 	}
 
 	

@@ -1,8 +1,13 @@
 apply plugin: 'java'
 
 repositories {
-     jcenter()
+ 	mavenCentral()
+  	maven {
+		url 'http://19.59.55.93:8081/nexus/content/groups/ford_repositories/'
+		url 'http://www.nexus.ford.com/content/groups/public/'
+	}
 }
+
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'

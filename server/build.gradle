@@ -1,12 +1,21 @@
 apply plugin: 'java'
 
 repositories {
-     jcenter()
+	jcenter()
+ 	mavenCentral()
+  	maven {
+		url 'http://www.nexus.ford.com/content/groups/public'
+	}
 }
+
 
 buildscript {
 	repositories {
-		mavenCentral()
+	jcenter()
+ 	mavenCentral()
+  	maven {
+		url 'http://www.nexus.ford.com/content/groups/public'
+	}
 		}
      dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
